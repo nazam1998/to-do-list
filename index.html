@@ -10,23 +10,36 @@
 
 <body>
     <nav>
-        <div class="form-group mx-auto my-5 w-25">
-            <input type="file" class="inputfile form-control" id="background">
+        <div class="form-group mx-auto my-5 container row">
+            <input type="file" class="inputfile form-control w-25" id="background">
+            <input type="text" id="ajout-liste" name="liste" class="form-control mx-auto w-25"
+                placeholder="Ajouter une nouvelle liste">
         </div>
     </nav>
     <div class="app">
         <div id="lists" class="lists row my-5 flex-nowrap mx-auto">
-            <div class="list card mx-5" id="list-1">
+
+            
+            <div class="list card mx-5">
                 <h5 class="card-header w-100">Liste 1</h5>
-                <div class="card-body">
-                    <div class="list-item">item1</div>
+                <div class="card-body" id="list-1">
+                    <div class="list-item" draggable="true">item1</div>
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-success">Add</button>
                 </div>
             </div>
-            <div class="list card mx-5" id="list-2"></div>
-            <div class="list card mx-5" id="list-3"></div>
+
+            <div class="list card mx-5">
+                <h5 class="card-header w-100">Liste 1</h5>
+                <div class="card-body" id="list-2">
+                    <div class="list-item" draggable="true">item1</div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success">Add</button>
+                </div>
+            </div>
+
         </div>
     </div>
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
