@@ -1,28 +1,69 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
-
-.list-item{
+.list-item {
     border: 0.5px rgba(0, 0, 0, 0.1) solid;
     border-radius: 7px;
     padding: 10px;
     margin: 3px 0;
+    background-color: rgba(255, 255, 255, 0.9);
 }
-.list{
+.list-item i{
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    transition: 1s;
+}
+.list-item:hover i{
+    opacity: 1;
+    left: 80%;
+}
+.list-item i:hover{
+    color: red;
+}
+.list {
     flex: 0 0 25%;
 }
-body{
+
+body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
-nav{
+
+.card-header i {
+    opacity: 0;
+    position: relative;
+    left: 20%;
+    transition: 0.5s;
+}
+
+.card-header:hover i {
+    opacity: 1;
+    left: 50%;
+}
+
+.card-body {
+    max-height: 350px;
+    overflow: auto;  
+}
+
+nav {
     position: fixed;
     top: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
 }
-.app{
+
+.app {
     position: relative;
     top: 200px
+}
+.placeholder {
+    padding: 10px;
+    margin: 3px 0;
+    height: 40px;
+    border-radius: 7px;
 }
