@@ -2,15 +2,25 @@ let lists = [];
 //
 let listeNames = [];
 // Liste
+
 let liste = document.querySelectorAll('.card-body');
+
 // Section qui contient toutes les listes
+
 let listContainer = document.querySelector('.lists');
+
 // input qui permet d'ajouter une nouvelle liste
+
 let input = document.getElementById('ajout-liste');
+
 // bouton qui permet d'ajouter la liste
+
 let add = document.getElementById('add');
+
 // permet de changer le background du site
+
 let background = document.getElementById('background');
+
 let cpt = 0;
 
 liste.forEach(e => {
@@ -139,6 +149,7 @@ input.addEventListener('keypress', (event) => {
         input.value = '';
     }
 });
+
 createList('Template');
 // fonction qui permet de créer une nouvelle liste
 background.addEventListener('change', function () {
