@@ -16,13 +16,13 @@
     transition: 1s;
 }
 
-nav input{
+nav input {
     width: 25% !important;
 }
 
 .list-item:hover i {
     opacity: 1;
-    
+
 }
 
 .list-item i:hover {
@@ -78,12 +78,22 @@ nav {
     border-radius: 7px;
 }
 
+#lists {
+    flex-wrap: nowrap;
+}
+
 @media (max-width: 850px) {
     .list {
-        flex: 25%;
+        flex: 100%;
+        margin: 10px auto;
     }
-    nav input{
+
+    #lists {
+        flex-wrap: wrap;
+    }
+
+    nav input {
         width: 100% !important;
-        margin: 5px auto;
+        margin: 10px auto;
     }
 }

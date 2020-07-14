@@ -21,6 +21,10 @@ let add = document.getElementById('add');
 
 let background = document.getElementById('background');
 
+// barre de navigation
+
+let nav = document.querySelector('nav');
+
 let cpt = 0;
 
 liste.forEach(e => {
@@ -79,6 +83,8 @@ const createList = (texte) => {
 
     let div = document.createElement('div');
     let titre = document.createElement('h5');
+    let spanTitre = document.createElement('span');
+    let inputTitre = document.createElement('input');
     let cardBody = document.createElement('div');
     let cardFooter = document.createElement('div');
     let buttonAdd = document.createElement('button');
@@ -91,9 +97,12 @@ const createList = (texte) => {
 
     // Titre de la liste et bouton qui permet de la supprimer
 
-    titre.textContent = texte;
+    spanTitre.textContent = texte;
     titre.className = "card-header w-100";
     div.appendChild(titre);
+    titre.appendChild(spanTitre);
+    titre.appendChild(inputTitre);
+    inputTitre.className = 'form-control d-none';
     remove.className = 'btn btn-danger fas fa-trash-alt';
     titre.appendChild(remove);
 
@@ -121,6 +130,22 @@ const createList = (texte) => {
         createItem(cardBody);
     });
 
+    titre.addEventListener('dblclick', () => {
+        spanTitre.classList.toggle('d-none');
+        inputTitre.classList.toggle('d-none');
+        remove.classList.toggle('d-none');
+        inputTitre.value = spanTitre.textContent;
+    });
+
+    inputTitre.addEventListener('keypress', (event) => {
+        if (event.key == 'Enter' && event.target.value != '') {
+            spanTitre.classList.toggle('d-none');
+            inputTitre.classList.toggle('d-none');
+            remove.classList.toggle('d-none');
+            spanTitre.textContent = inputTitre.value;
+            inputTitre.value = '';
+        }
+    });
     remove.addEventListener('click', () => {
         listContainer.removeChild(div);
         lists.splice(lists.indexOf('#' + cardBody.id), 1);
@@ -151,15 +176,30 @@ input.addEventListener('keypress', (event) => {
 });
 
 createList('Template');
+
 // fonction qui permet de créer une nouvelle liste
+
 background.addEventListener('change', function () {
     var url = URL.createObjectURL(this.files[0]);
     document.body.style.backgroundImage = "url(" + url + ")";
 });
 
-$(() => {
-    $(lists.join(',')).sortable({
-        connectWith: '.card-body',
-        placeholder: "placeholder bg-light",
-    }).disableSelection();
+// fonction qui permet de cacher la nav lorsqu'on descend et l'affiche lorsqu'on remonte
+
+$(function () {
+    var lastScrollTop = 0,
+        delta = 5;
+
+    nav.style.transition = '0.7s';
+    $(window).scroll(function () {
+        var nowScrollTop = $(this).scrollTop();
+        if (Math.abs(lastScrollTop - nowScrollTop) >= delta) {
+            if (nowScrollTop > lastScrollTop) {
+                nav.style.top = "-100%";
+            } else {
+                nav.style.top = '0';
+            }
+            lastScrollTop = nowScrollTop;
+        }
+    });
 });
