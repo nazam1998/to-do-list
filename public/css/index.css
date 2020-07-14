@@ -39,6 +39,7 @@ body {
     background-size: cover;
     background-position: center;
     background-image: url('../img/deer.jpg');
+    overflow-y: hidden;
 }
 
 .card-header i {
@@ -83,6 +84,10 @@ nav {
 }
 
 @media (max-width: 850px) {
+    body{
+        overflow-y: visible;
+        overflow-x: hidden;
+    }
     .list {
         flex: 100%;
         margin: 10px auto;
