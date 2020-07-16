@@ -1,6 +1,6 @@
 let lists = [];
-//
-let listeNames = [];
+let listsCard = [];
+
 // Liste
 
 let liste = document.querySelectorAll('.card-body');
@@ -110,6 +110,7 @@ const createList = (texte) => {
 
     cardBody.className = "card-body";
     cardBody.id = "list-" + (cpt + 1);
+    div.id = 'list-card' + (cpt + 1);
     div.appendChild(cardBody);
 
     // cardFooter 
@@ -123,6 +124,7 @@ const createList = (texte) => {
     buttonAdd.textContent = "Add";
     cardFooter.appendChild(buttonAdd);
     lists.push('#' + cardBody.id);
+    lists.push('#' + div.id);
 
     createItem(cardBody);
 
@@ -144,6 +146,7 @@ const createList = (texte) => {
             remove.classList.toggle('d-none');
             spanTitre.textContent = inputTitre.value;
             inputTitre.value = '';
+
         }
     });
     remove.addEventListener('click', () => {
@@ -155,7 +158,9 @@ const createList = (texte) => {
                 connectWith: '.card-body',
                 placeholder: "placeholder bg-light",
             }).disableSelection();
+
         });
+
     });
     // ajoute le sortable à la nouvelle liste
 
@@ -164,7 +169,9 @@ const createList = (texte) => {
             connectWith: '.card-body',
             placeholder: "placeholder bg-light",
         }).disableSelection();
+
     });
+
 
 }
 
@@ -200,6 +207,20 @@ $(function () {
                 nav.style.top = '0';
             }
             lastScrollTop = nowScrollTop;
+        }
+    });
+    $("#ajout-liste").keypress(event => {
+        if (event.key == "Enter") {
+            $.ajax({
+                url: './store.php',
+                method: 'post',
+                dataType: 'json',
+                data: event.target.value,
+                success: function (response) {
+                    console.log(response);
+                    console.log(JSON.stringify(response));
+                },
+            });
         }
     });
 });

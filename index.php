@@ -12,8 +12,7 @@
     <nav>
         <div class="form-group mx-auto my-5 container row">
             <input type="file" class="inputfile form-control" id="background">
-            <input type="text" id="ajout-liste" name="liste" class="form-control mx-auto"
-                placeholder="Ajouter une nouvelle liste">
+            <input type="text" id="ajout-liste" name="liste" class="form-control mx-auto" placeholder="Ajouter une nouvelle liste">
         </div>
     </nav>
     <div class="app">
