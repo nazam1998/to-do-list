@@ -80,7 +80,7 @@ const createItem = (div) => {
 }
 const createList = (texte) => {
 
-
+    let container = document.createElement('div');
     let div = document.createElement('div');
     let titre = document.createElement('h5');
     let spanTitre = document.createElement('span');
@@ -88,12 +88,15 @@ const createList = (texte) => {
     let cardBody = document.createElement('div');
     let cardFooter = document.createElement('div');
     let buttonAdd = document.createElement('button');
+    let icones = document.createElement('div');
     let remove = document.createElement('i');
+    let edit = document.createElement('i');
 
     // div qui correspond à la liste en elle-même
-
-    div.className = 'list card mx-5 h-100';
-    listContainer.appendChild(div);
+    container.className = "list mx-5 h-100"
+    div.className = 'card';
+    container.appendChild(div)
+    listContainer.appendChild(container);
 
     // Titre de la liste et bouton qui permet de la supprimer
 
@@ -103,14 +106,17 @@ const createList = (texte) => {
     titre.appendChild(spanTitre);
     titre.appendChild(inputTitre);
     inputTitre.className = 'form-control d-none';
+    titre.appendChild(icones);
     remove.className = 'btn btn-danger fas fa-trash-alt';
-    titre.appendChild(remove);
+    edit.className = 'btn btn-warning fas fa-pen mr-1';
+    icones.appendChild(edit);
+    icones.appendChild(remove);
 
     // Card body 
 
     cardBody.className = "card-body";
     cardBody.id = "list-" + (cpt + 1);
-    div.id = 'list-card' + (cpt + 1);
+    container.id = 'list-card' + (cpt + 1);
     div.appendChild(cardBody);
 
     // cardFooter 
@@ -124,7 +130,7 @@ const createList = (texte) => {
     buttonAdd.textContent = "Add";
     cardFooter.appendChild(buttonAdd);
     lists.push('#' + cardBody.id);
-    lists.push('#' + div.id);
+    listsCard.push('#' + container.id);
 
     createItem(cardBody);
 
@@ -136,38 +142,57 @@ const createList = (texte) => {
         spanTitre.classList.toggle('d-none');
         inputTitre.classList.toggle('d-none');
         remove.classList.toggle('d-none');
+        edit.classList.toggle('d-none');
         inputTitre.value = spanTitre.textContent;
     });
-
+    edit.addEventListener('click', () => {
+        spanTitre.classList.toggle('d-none');
+        inputTitre.classList.toggle('d-none');
+        remove.classList.toggle('d-none');
+        edit.classList.toggle('d-none');
+        inputTitre.value = spanTitre.textContent;
+    });
     inputTitre.addEventListener('keypress', (event) => {
         if (event.key == 'Enter' && event.target.value != '') {
             spanTitre.classList.toggle('d-none');
             inputTitre.classList.toggle('d-none');
             remove.classList.toggle('d-none');
+            edit.classList.toggle('d-none');
             spanTitre.textContent = inputTitre.value;
             inputTitre.value = '';
 
         }
     });
     remove.addEventListener('click', () => {
-        listContainer.removeChild(div);
+        listContainer.removeChild(container);
         lists.splice(lists.indexOf('#' + cardBody.id), 1);
+        listsCard.splice(listsCard.indexOf('#' + container.id), 1);
 
         $(() => {
             $(lists.join(',')).sortable({
                 connectWith: '.card-body',
                 placeholder: "placeholder bg-light",
             }).disableSelection();
+            $(listsCard.join(',')).sortable({
+                connectWith: '.app',
+
+                placeholder: "placeholder-card bg-light",
+            }).disableSelection();
 
         });
 
     });
+
     // ajoute le sortable à la nouvelle liste
 
     $(() => {
         $(lists.join(',')).sortable({
             connectWith: '.card-body',
             placeholder: "placeholder bg-light",
+        }).disableSelection();
+        $(listsCard.join(',')).sortable({
+            connectWith: '.app',
+            placeholder: "placeholde-card bg-light",
         }).disableSelection();
 
     });
