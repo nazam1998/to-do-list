@@ -1,3 +1,4 @@
+
 let lists = [];
 let listsCard = [];
 
@@ -37,6 +38,7 @@ const createItem = (div) => {
     let spanItem = document.createElement('span');
     let inputItem = document.createElement('input');
     let removeItem = document.createElement('i');
+    let editItem = document.createElement('i');
 
     listItem.className = 'list-item';
     listItem.draggable = true;
@@ -45,10 +47,12 @@ const createItem = (div) => {
     inputItem.value = spanItem.innerText;
     inputItem.className = "form-control d-none";
     removeItem.className = 'fas fa-times mt-1 mr-1';
+    editItem.className = 'fas fa-pen mt-1 mr-1';
     removeItem.style.cursor = "pointer";
     div.appendChild(listItem);
     listItem.appendChild(spanItem);
     listItem.appendChild(inputItem);
+    listItem.appendChild(editItem);
     listItem.appendChild(removeItem);
     listItem.addEventListener('dblclick', () => {
         inputItem.classList.toggle('d-none');
@@ -78,6 +82,7 @@ const createItem = (div) => {
     });
 
 }
+
 const createList = (texte) => {
 
     let container = document.createElement('div');
@@ -131,7 +136,6 @@ const createList = (texte) => {
     cardFooter.appendChild(buttonAdd);
     lists.push('#' + cardBody.id);
     listsCard.push('#' + container.id);
-
     createItem(cardBody);
 
     buttonAdd.addEventListener('click', () => {
@@ -180,6 +184,7 @@ const createList = (texte) => {
             }).disableSelection();
 
         });
+
 
     });
 
@@ -234,18 +239,23 @@ $(function () {
             lastScrollTop = nowScrollTop;
         }
     });
+
     $("#ajout-liste").keypress(event => {
         if (event.key == "Enter") {
             $.ajax({
-                url: './store.php',
+                url: 'store.php',
                 method: 'post',
-                dataType: 'json',
                 data: event.target.value,
                 success: function (response) {
                     console.log(response);
-                    console.log(JSON.stringify(response));
                 },
+                error : function(resultat, statut, erreur){
+                        console.log(resultat);
+                        console.log(statut);
+                        console.log(erreur);
+                }
             });
         }
     });
+
 });

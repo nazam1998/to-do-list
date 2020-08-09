@@ -21,6 +21,7 @@
     </div>
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/jqueryui/jquery-ui.min.js"></script>
+    <!-- <script src="./node_modules/ajax/lib/ajax.js"></script> -->
     <script src="./src/js/index.js"></script>
 </body>
 
